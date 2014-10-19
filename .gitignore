@@ -1,0 +1,14 @@
+## directories
+.vagrant
+node_modules
+
+## files
+
+.DS_Store
+.tm_properties
+hosts
+hosts_robospace
+npm-debug.log
+site.yml
+site_robospace.yml
+examples/site_meatspace.yml

@@ -1,0 +1,52 @@
+---
+# File: defaults/main.yml - Default variables for Meatspace Chat v2 role
+
+#############################################################################
+#
+# meatspace_chat_v2_domain:        URL for Meatspace Chat app
+# meatspace_chat_v2_port:          TCP port for Meatspace Chat app
+# meatspace_chat_v2_node_version:  Preferred Node.js version
+# meatspace_chat_v2_os_packages:   OS dependency packages to install
+# meatspace_chat_v2_repo:          Meatspace Chat GitHub repository
+# meatspace_chat_v2_nvm_repo:      Node Version Manager Github repository
+#
+#############################################################################
+
+meatspace_chat_v2_domain: "http://10.1.1.40"
+
+meatspace_chat_v2_port: 3000
+
+meatspace_chat_v2_node_version: "0.10.32"
+
+meatspace_chat_v2_repo: "github.com/meatspaces/meatspace-chat-v2.git"
+
+meatspace_chat_v2_nvm_repo: "github.com/creationix/nvm.git"
+
+meatspace_chat_v2_os_packages:
+  - autoconf
+  - automake
+  - build-essential
+  - curl
+  - git-core
+  - libass-dev
+  - libfreetype6-dev
+  - libgpac-dev
+  - libmp3lame-dev
+  - libopus-dev
+  - libssl-dev
+  - libtheora-dev
+  - libtool
+  - libvorbis-dev
+  - libx264-dev
+  - pkg-config
+  - redis-server
+  - texi2html
+  - unzip
+  - uuid-dev
+  - uuid
+  - yasm
+  - zlib1g-dev
+
+meatspace_chat_v2_ffmpeg_build: "/home/{{ meatspace_chat_v2_admin }}/ffmpeg_build"
+
+meatspace_chat_v2_ffmpeg_src: "/home/{{ meatspace_chat_v2_admin }}/ffmpeg_sources"
