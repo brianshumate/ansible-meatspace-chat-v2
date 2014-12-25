@@ -12,15 +12,15 @@
 #
 #############################################################################
 
-meatspace_chat_v2_domain: "http://10.1.1.40"
+meatspace_chat_v2_domain: http://10.1.1.40
 
 meatspace_chat_v2_port: 3000
 
-meatspace_chat_v2_node_version: "0.10.32"
+meatspace_chat_v2_node_version: 0.10.35
 
-meatspace_chat_v2_repo: "github.com/meatspaces/meatspace-chat-v2.git"
+meatspace_chat_v2_repo: github.com/meatspaces/meatspace-chat-v2.git
 
-meatspace_chat_v2_nvm_repo: "github.com/creationix/nvm.git"
+meatspace_chat_v2_nvm_repo: github.com/creationix/nvm.git
 
 meatspace_chat_v2_os_packages:
   - autoconf
@@ -47,6 +47,6 @@ meatspace_chat_v2_os_packages:
   - yasm
   - zlib1g-dev
 
-meatspace_chat_v2_ffmpeg_build: "/home/{{ meatspace_chat_v2_admin }}/ffmpeg_build"
+meatspace_chat_v2_ffmpeg_build: /home/{{ meatspace_chat_v2_admin }}/ffmpeg_build
 
-meatspace_chat_v2_ffmpeg_src: "/home/{{ meatspace_chat_v2_admin }}/ffmpeg_sources"
+meatspace_chat_v2_ffmpeg_src: /home/{{ meatspace_chat_v2_admin }}/ffmpeg_sources

@@ -1,10 +1,6 @@
 ---
 # File: tasks/main.yml - Tasks for Meatspace Chat v2 role
 
-- name: Add backports source
-  sudo: True
-  lineinfile: dest=//etc/apt/sources.list line="deb http://ftp.debian.org/debian wheezy-backports main contrib non-free"
-
 - name: Update OS package cache
   sudo: True
   apt: update-cache=yes
@@ -13,92 +9,122 @@
 
 - name: Install OS packages
   sudo: True
-  apt: "pkg={{ item }} default_release=wheezy-backports state=installed"
+  apt: pkg={{ item }} state=installed
   with_items: meatspace_chat_v2_os_packages
   tags:
     - system_packages
 
-- name: Create source home
-  file: "path={{ meatspace_chat_v2_ffmpeg_src }} state=directory owner={{ meatspace_chat_v2_admin }} mode=0755"
+- name: Create bin dir
+  sudo: False
+  file: path={{ meatspace_chat_v2_bin_dir}} state=directory owner={{ meatspace_chat_v2_admin }} mode=0755
+
+- name: Create source dir
+  sudo: False
+  file: path={{ meatspace_chat_v2_ffmpeg_src }} state=directory owner={{ meatspace_chat_v2_admin }} mode=0755
 
 - name: Download libvpx
-  get_url: "url=http://webm.googlecode.com/files/libvpx-v1.3.0.tar.bz2 dest={{ meatspace_chat_v2_ffmpeg_src }}/libvpx-v1.3.0.tar.bz2 mode=0644"
+  sudo: False
+  get_url: url=http://webm.googlecode.com/files/libvpx-v1.3.0.tar.bz2 dest={{ meatspace_chat_v2_ffmpeg_src }}/libvpx-v1.3.0.tar.bz2 mode=0644
 
 - name: Unpack libvpx
-  unarchive: "src={{ meatspace_chat_v2_ffmpeg_src }}/libvpx-v1.3.0.tar.bz2 dest={{ meatspace_chat_v2_ffmpeg_src }}/libvpx-v1.3.0 copy=no"
+  sudo: False
+  unarchive: src={{ meatspace_chat_v2_ffmpeg_src }}/libvpx-v1.3.0.tar.bz2 dest={{ meatspace_chat_v2_ffmpeg_src }}/ copy=no
 
-- name: Build libvpx
-  command: "PATH=$PATH:$HOME/bin"
-  command: "./configure --prefix={{ meatspace_chat_v2_ffmpeg_build }} --disable-examples chdir={{ meatspace_chat_v2_ffmpeg_src }}/libvpx-v1.3.0"
-  command: "PATH=$PATH:$HOME/bin make chdir={{ meatspace_chat_v2_ffmpeg_src }}/libvpx-v1.3.0"
+- name: Configure libvpx
+  sudo: False
+  shell: ./configure --prefix={{ meatspace_chat_v2_ffmpeg_build }} --disable-examples chdir={{ meatspace_chat_v2_ffmpeg_src }}/libvpx-v1.3.0
+
+- name: make libvpx
+  sudo: False
+  shell: make chdir={{ meatspace_chat_v2_ffmpeg_src }}/libvpx-v1.3.0
 
 - name: Install libvpx
   sudo: True
-  command: "make install chdir={{ meatspace_chat_v2_ffmpeg_src }}/libvpx-v1.3.0"
+  shell: make install chdir={{ meatspace_chat_v2_ffmpeg_src }}/libvpx-v1.3.0
 
 - name: Download fdk-aac
-  get_url: "url=https://github.com/mstorsjo/fdk-aac/zipball/master dest={{ meatspace_chat_v2_ffmpeg_src }}/fdk-aac.zip mode=0644"
+  sudo: False
+  get_url: url=https://github.com/mstorsjo/fdk-aac/zipball/master dest={{ meatspace_chat_v2_ffmpeg_src }}/fdk-aac.zip mode=0644
 
 - name: Unpack fdk-aac
-  unarchive: "src={{ meatspace_chat_v2_ffmpeg_src }}/fdk-aac.zip dest={{ meatspace_chat_v2_ffmpeg_src }}/mstorsjo-fdk-aac copy=no"
+  sudo: False
+  unarchive: src={{ meatspace_chat_v2_ffmpeg_src }}/fdk-aac.zip dest={{ meatspace_chat_v2_ffmpeg_src }}/ copy=no
 
-- name: Build fdk-aac
-  command: "PATH=$PATH:$HOME/bin chdir={{ meatspace_chat_v2_ffmpeg_src }}/mstorsjo-fdk-aac"
-  command: "autoreconf -fiv chdir={{ meatspace_chat_v2_ffmpeg_src }}/mstorsjo-fdk-aac"
-	command: "./configure --prefix=$HOME/ffmpeg_build --disable-shared chdir={{ meatspace_chat_v2_ffmpeg_src }}/mstorsjo-fdk-aac"
-  command: "make chdir={{ meatspace_chat_v2_ffmpeg_src }}/mstorsjo-fdk-aac"
+- name: Prepare fdk-aac
+  sudo: False
+  shell: cd {{ meatspace_chat_v2_ffmpeg_src }}/mstorsjo-fdk-aac-* && autoreconf -fiv
+
+- name: Configure fdk-aac
+  sudo: False
+  shell: cd {{ meatspace_chat_v2_ffmpeg_src }}/mstorsjo-fdk-aac-* && ./configure --prefix={{ meatspace_chat_v2_ffmpeg_build }} --disable-shared
+
+- name: Make fdk-aac
+  sudo: False
+  shell: cd {{ meatspace_chat_v2_ffmpeg_src }}/mstorsjo-fdk-aac-* && make
 
 - name: Install fdk-aac
   sudo: True
-  command: "make install chdir={{ meatspace_chat_v2_ffmpeg_src }}/mstorsjo-fdk-aac"
-	command: "make distclean chdir={{ meatspace_chat_v2_ffmpeg_src }}/mstorsjo-fdk-aac"
+  shell: cd {{ meatspace_chat_v2_ffmpeg_src }}/mstorsjo-fdk-aac-* && make install
+
+#- name: Clean fdk-aac
+#  sudo: True
+#	shell: cd "{{ meatspace_chat_v2_ffmpeg_src }}/mstorsjo-fdk-aac*" && make distclean
 
 - name: Download ffmpeg
-  get_url: "url=http://ffmpeg.org/releases/ffmpeg-snapshot.tar.bz2 dest={{ meatspace_chat_v2_ffmpeg_src }}/ffmpeg-snapshot.tar.bz2 mode=0644"
+  sudo: False
+  get_url: url=http://ffmpeg.org/releases/ffmpeg-snapshot.tar.bz2 dest={{ meatspace_chat_v2_ffmpeg_src }}/ffmpeg-snapshot.tar.bz2 mode=0644
 
 - name: Unpack ffmpeg
-  unarchive: "src={{ meatspace_chat_v2_ffmpeg_src }}/fffmpeg-snapshot.tar.bz2 dest={{ meatspace_chat_v2_ffmpeg_src }}/ffmpeg copy=no"
+  sudo: False
+  unarchive: src={{ meatspace_chat_v2_ffmpeg_src }}/ffmpeg-snapshot.tar.bz2 dest={{ meatspace_chat_v2_ffmpeg_src }}/ copy=no
 
-- name: Build ffmpeg
-  command: "PATH=$PATH:$HOME/bin"
-	command: "PKG_CONFIG_PATH=$HOME/ffmpeg_build/lib/pkgconfig ./configure --prefix=$HOME/ffmpeg_build --extra-cflags=-I$HOME/ffmpeg_build/include --extra-ldflags=-L$HOME/ffmpeg_build/lib --bindir=$HOME/bin --enable-gpl --enable-libass --enable-libfdk-aac --enable-libfreetype --enable-libmp3lame \
-  --enable-libopus \
-  --enable-libtheora \
-  --enable-libvorbis \
-  --enable-libvpx \
-  --enable-libx264 \
-  --enable-nonfree"
+- name: Configure ffmpeg
+  sudo: False
+  shell: PKG_CONFIG_PATH={{ meatspace_chat_v2_home_dir }}/ffmpeg_build/lib/pkgconfig ./configure --prefix={{ meatspace_chat_v2_home_dir }}/ffmpeg_build --extra-cflags=-I{{ meatspace_chat_v2_home_dir }}/ffmpeg_build/include --extra-ldflags=-L{{ meatspace_chat_v2_home_dir }}/ffmpeg_build/lib --bindir={{ meatspace_chat_v2_home_dir }}/bin --enable-gpl --enable-libass --enable-libfdk-aac --enable-libfreetype --enable-libmp3lame --enable-libopus --enable-libtheora --enable-libvorbis --enable-libvpx --enable-libx264 --enable-nonfree chdir={{ meatspace_chat_v2_ffmpeg_src }}/ffmpeg
 
 - name: Install ffmpeg
   sudo: True
-  command: "make install chdir={{ meatspace_chat_v2_ffmpeg_src }}/ffmpeg"
-	command: "make distclean chdir={{ meatspace_chat_v2_ffmpeg_src }}/ffmpeg"
+  shell: make install chdir={{ meatspace_chat_v2_ffmpeg_src }}/ffmpeg
+
+#- name: Clean ffmpeg
+#  sudo: True
+#	shell: make distclean chdir={{ meatspace_chat_v2_ffmpeg_src }}/ffmpeg
 
 - name: Install Node Version Manager (NVM)
   sudo: False
-  git: "repo=https://{{ meatspace_chat_v2_nvm_repo }} dest={{ meatspace_chat_v2_nvm_dir }} accept_hostkey=True"
+  git: repo=https://{{ meatspace_chat_v2_nvm_repo }} dest={{ meatspace_chat_v2_nvm_dir }} accept_hostkey=True
   tags:
     - node_packages
 
 - name: Install Node.js
   sudo: False
-  shell: "source {{ meatspace_chat_v2_nvm_dir }}/nvm.sh && nvm install {{ meatspace_chat_v2_node_version }} creates={{ meatspace_chat_v2_node_dir }} executable=/bin/bash"
+  shell: source {{ meatspace_chat_v2_nvm_dir }}/nvm.sh && nvm install {{ meatspace_chat_v2_node_version }} creates={{ meatspace_chat_v2_node_dir }} executable=/bin/bash
   tags:
     - node_packages
 
+- name: Meatspace Chat v2 home
+  sudo: False
+  file: path={{ meatspace_chat_v2_dir }} state=directory owner={{ meatspace_chat_v2_admin }} mode=0755
+
 - name: Clone Meatspace Chat v2
   sudo: False
-  git: "repo=git://{{ meatspace_chat_v2_repo }} dest={{ meatspace_chat_v2_dir }} accept_hostkey=True"
+  git: repo=git://{{ meatspace_chat_v2_repo }} dest={{ meatspace_chat_v2_dir }} accept_hostkey=True
+
+- name: Install updated Waypoints
+  sudo: False
+  npm: name=imakewebthings/waypoints#79903c8 path={{ meatspace_chat_v2_dir }} executable={{ meatspace_chat_v2_nvm_dir }}/v{{ meatspace_chat_v2_node_version }}/bin/npm production=yes
+  tags:
+    - node_packages
 
 - name: Install local Node packages
   sudo: False
-  npm: "path={{ meatspace_chat_v2_dir }} executable={{ meatspace_chat_v2_nvm_dir }}/v{{ meatspace_chat_v2_node_version }}/bin/npm state=present"
+  npm: path={{ meatspace_chat_v2_dir }} executable={{ meatspace_chat_v2_nvm_dir }}/v{{ meatspace_chat_v2_node_version }}/bin/npm state=present
   tags:
     - node_packages
 
 - name: Meatspace Chat v2 settings
   sudo: False
-  template: "src=local.json.j2 dest={{ meatspace_chat_v2_dir }}/local.json owner={{ meatspace_chat_v2_admin }} group={{ meatspace_chat_v2_admin }} mode=0644"
+  template: src=local.json.j2 dest={{ meatspace_chat_v2_dir }}/local.json owner={{ meatspace_chat_v2_admin }} group={{ meatspace_chat_v2_admin }} mode=0644
 
 - name: Create upstart configuration
   sudo: True
@@ -106,7 +132,7 @@
 
 - name: Create upstart script
   sudo: True
-  template: "src=start_meatspace-chat.sh.j2 dest={{ meatspace_chat_v2_dir }}/start_meatspace-chat.sh mode=0755"
+  template: src=start_meatspace-chat.sh.j2 dest={{ meatspace_chat_v2_dir }}/start_meatspace-chat.sh mode=0755
 
 - name: Start Meatspace Chat v2
   sudo: True

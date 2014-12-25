@@ -1,4 +1,4 @@
-# Ansible Meatspace Chat v2
+# Ansible Meatspace Chat Version 2
 
 ```
 
@@ -69,10 +69,10 @@ Meatspace Chat v2 web application.
 The Meatspace Chat v2 role requires a Debian based Linux host and is tested to
 function on Ubuntu with the following specific software versions:
 
-* Ansible: 1.7.2
+* Ansible: 1.8.2
 * Meatspace Chat v2: GitHub Master
-* Node.js: 0.10.32
-* Debian: 7.6 with backports (Ubuntu works too)
+* Node.js: 0.10.35
+* Ubuntu: 14.04
 
 ## Role Variables
 

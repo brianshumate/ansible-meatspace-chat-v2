@@ -12,6 +12,9 @@
 #############################################################################
 
 meatspace_chat_v2_admin: vagrant
-meatspace_chat_v2_nvm_dir: "/home/{{ meatspace_chat_v2_admin }}/.nvm"
+meatspace_chat_v2_nvm_dir: /home/{{ meatspace_chat_v2_admin }}/.nvm
 meatspace_chat_v2_node_dir: "{{ meatspace_chat_v2_nvm_dir }}/v{{ meatspace_chat_v2_node_version }}/bin"
+meatspace_chat_v2_home_dir: /home/{{ meatspace_chat_v2_admin }}
+meatspace_chat_v2_bin_dir: /home/{{ meatspace_chat_v2_admin }}/bin
 meatspace_chat_v2_dir: "/home/{{ meatspace_chat_v2_admin }}/meatspace-chat"
+meatspace_chat_v2_fdk_aac_dir: "{{ meatspace_chat_v2_ffmpeg_src }}/mstorsjo-fdk-aac-*"

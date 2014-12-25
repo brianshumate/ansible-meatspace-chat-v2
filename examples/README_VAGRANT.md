@@ -1,4 +1,4 @@
-# Ansible Meatspace Chat Vagrant Notes
+# Ansible Meatspace Chat Version 2 Vagrant
 
 ```
 
@@ -69,12 +69,12 @@ with an Ubuntu virtual machine on VirtualBox and provisioned by Vagrant.
 This Meatspace Chat role requires a Debian based Linux host and has been
 tested to function on Ubuntu with the following specific software versions:
 
-* Ansible: 1.7.1
-* VirtualBox: 4.3.16
+* Ansible: 1.8.2
+* VirtualBox: 4.3.20
 * Vagrant: 1.6.5
-* Meatspace Chat: GitHub Master
-* Node.js: 0.10.31
-* Ubuntu: 13.10, 13.04, 12.10, 12.04
+* Meatspace Chat v2: GitHub Master
+* Node.js: 0.10.35
+* Ubuntu: 14.04
 
 Install the following on the Mac that will be used for Meatspace Chat
 development, testing, or trying to take over the world with the next time

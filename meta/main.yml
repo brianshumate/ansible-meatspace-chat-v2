@@ -59,11 +59,11 @@ galaxy_info:
   #  - maverick
   #  - natty
   #  - oneiric
-    - precise
-    - quantal
-    - raring
-    - saucy
-  #  - trusty
+  #  - precise
+  #  - quantal
+  #  - raring
+  #  - saucy
+    - trusty
   #- name: SLES
   #  versions:
   #  - all
