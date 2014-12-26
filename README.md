@@ -130,10 +130,8 @@ The following OS dependency packages are defined in
 
 ## Configuration
 
-At a minimum, modify the variables defined in the following files as
-necessary:
+At a minimum, modify variables defined in the following files:
 
-* `defaults/main.yml`
 * `vars/main.yml`
 
 Copy `hosts.example` to `hosts` and edit it to update the values for your
@@ -145,24 +143,15 @@ Meatspace Chat host. Be sure to change the following values:
 
 ## Example Playbook
 
-After configuration a basic Meatspace Chat installation and activation is
+After configuration, a basic Meatspace Chat installation and activation is
 possible using the included `examples/site.yml` playbook.
 
-Copy `examples/site.yml.example` to `examples/site.yml`, edit it, and modify
-the `meatspace_chat_v2_twitter_key` and `meatspace_chat_v2_twitter_secret`
-variables, which will be passed to the role at runtime.
-
-Alternatively, you can specify the variables with the ` --extra-vars` option
-to `ansible-playbook`. See the
-[Ansible documentation](http://docs.ansible.com/playbooks_variables.html) for
-more details on using variables.
+Copy `examples/site.yml.example` to `examples/site.yml`. After editing your
+hosts inventory and variables, you can execute the playbook like so:
 
 ```
 ansible-playbook -i hosts site.yml
 ```
-
-**NOTE**: Do not commit `site.yml` to Github after adding Twitter credentials;
-the included `.gitignore` will ignore it by default.
 
 ## Development Vagrant Instance
 
