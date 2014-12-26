@@ -84,38 +84,30 @@ sharing application for great social justice...
 * [Vagrant](http://www.vagrantup.com/)
 * [Ansible](http://www.ansibleworks.com/docs/intro_installation.html)
 
-### Configuration
+### OS X Vagrant Quick Start
 
-Edit the variable values defined in the following files:
-
-* `defaults/main.yml`
-* `vars/main.yml`
-
-There is more information in the main project [README](README.md) about
-these variables.
-
-Finally, copy the `site.yml.example` playbook example to `site.yml` if you
-plan to use it and edit the following variables within it as appropriate:
-
-* `hosts`
-* `meatspacechat_twitter_key`
-* `meatspacechat_twitter_secret`
-
-### Activation
-
-After defining all variables, you can fire up your very own Meatspace Chat
-instance by changing into the `/etc/ansible/ansible-meatspace-chat` role
-directory and executing:
+You can get up and running quickly on OS X with VirtualBox and Vagrant by
+executing the following commands once you've installed Ansible:
 
 ```
+ANSIBLE_ROLES=PATH_TO_YOUR_ANSIBLE_ROLES
+ansible-galaxy install brianshumate.meatspace-chat-v2
+cd $ANSIBLE_ROLES/brianshumate.meatspace-chat-v2/examples
 vagrant up
 ```
 
+Make sure that the variable `ANSIBLE_ROLES` in the example above actually
+points to the directory where your Ansible roles will be installed by the
+`ansible-galaxy` command. This is `/etc/ansible/roles` by default.
+
 You can now point a browser that supports WebRTC to access your shiny new
-Meatspace Chat at this url:
+Meatspace Chat v2 at this url:
 
 ```
 http://10.1.1.40:3000
 ```
+
+For production, you should run the application on `localhost` / `127.0.0.1`
+and place a HTTP server like Nginx in front of the application.
 
 Enjoy!

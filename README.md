@@ -82,12 +82,22 @@ All variables are specified in `defaults/main.yml` and `vars/main.yml`.
 
 | Name           | Default Value | Description                        |
 | -------------- | ------------- | -----------------------------------|
-| meatspace_chat_v2_domain  | http://10.1.1.40 | URL for Meatspace Chat app |
+| meatspace_chat_v2_domain  | `http://10.1.1.40` | URL for Meatspace Chat app |
 | meatspace_chat_v2_port | 3000 | TCP port for Meatspace Chat app |
 | meatspace_chat_v2_node_version | 0.10.26 | Preferred Node.js version |
-| meatspace_chat_v2_os_packages | list | List of OS dependency packages to install |
-| meatspace_chat_v2_repo | github.com/meatspaces/meatspace_chat.git | Meatspace Chat GitHub repository |
-| meatspace_chat_v2_nvm_repo | github.com/creationix/nvm.git | Node Version Manager Github repository |
+| meatspace_chat_v2_repo | `github.com/meatspaces/meatspace-chat-v2.git` | Meatspace Chat GitHub repository |
+| meatspace_chat_v2_nvm_repo | `github.com/creationix/nvm.git` | Node Version Manager Github repository |
+| meatspace_chat_v2_os_packages | List | List of OS dependency packages to install |
+| meatspace_chat_v2_home_dir | `/home/vagrant` | Meatspace Chat admin OS Home directory |
+| meatspace_chat_v2_nvm_dir | `/home/vagrant/.nvm` | Node Version Manager (nvm) directory |
+| meatspace_chat_v2_node_dir | `/home/vagrant/.nvm/v0.10.35`       Node.js installation directory
+| meatspace_chat_v2_src_dir | `/home/vagrant/src` | Source code directory |
+| meatspace_chat_v2_app_dir | `/home/vagrant/meatspace-chat` | Meatspace Chat application directory |
+| meatspace_chat_v2_bin_dir | `/home/vagrant/bin` | Meatspace Chat admin binary directory |
+| meatspace_chat_v2_fdk_aac_dir | `/home/vagrant/src/ffmpeg/mstorsjo-fdk-aac-*` | FDK-AAC build direcotry |
+| meatspace_chat_v2_ffmpeg_src_dir | `/home/vagrant/src/ffmpeg` | ffmpeg source directory |
+| meatspace_chat_v2_ffmpeg_dir | `/home/vagrant/ffmpeg` | ffmpeg build directory |
+
 
 The following OS dependency packages are defined in
 `meatspace_chat_v2_os_packages` and installed by default:
@@ -117,9 +127,6 @@ The following OS dependency packages are defined in
 | Name           | Default Value | Description                        |
 | -------------- | ------------- | -----------------------------------|
 | meatspace_chat_v2_admin    | vagrant       | OS user account of Meatspace Chat owner
-| meatspace_chat_v2_nvm_dir  | /home/{{ meatspace_chat_v2_admin }}/nvm | Directory for Node Version Manager (nvm) installation |
-| meatspace_chat_v2_node_dir | {{ meatspace_chat_v2_nvm_dir }}/v{{ meatspace_chat_v2_node_version }}/bin | Directory for Node.js installation
-| meatspace_chat_v2_dir | /home/{{ meatspace_chat_v2_admin }}/meatspace_chat | The Meatspace Chat root directory
 
 ## Configuration
 
@@ -161,8 +168,8 @@ the included `.gitignore` will ignore it by default.
 
 See the [README_VAGRANT.md](https://github.com/brianshumate/ansible-meatspace-chat/blob/master/README_VAGRANT.md) for instructions on using this role with
 Mac OS X and Vagrant. If you have Ansible, VirtualBox, and Vagrant already
-installed, try changing into the `/etc/ansible/ansible-meatspace-chat` role
-directory and executing:
+installed, try changing into the
+`/etc/ansible/ansible-meatspace-chat/examples` role directory and executing:
 
 ```
 vagrant up
@@ -179,4 +186,3 @@ Apache 2
 ## Author Information
 
 [Brian Shumate](http://brianshumate.com)
-

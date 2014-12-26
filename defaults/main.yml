@@ -1,18 +1,27 @@
 ---
-# File: defaults/main.yml - Default variables for Meatspace Chat v2 role
+# File: defaults/main.yml - Meatspace Chat v2 role Default variables
 
 #############################################################################
 #
-# meatspace_chat_v2_domain:        URL for Meatspace Chat app
-# meatspace_chat_v2_port:          TCP port for Meatspace Chat app
-# meatspace_chat_v2_node_version:  Preferred Node.js version
-# meatspace_chat_v2_os_packages:   OS dependency packages to install
-# meatspace_chat_v2_repo:          Meatspace Chat GitHub repository
-# meatspace_chat_v2_nvm_repo:      Node Version Manager Github repository
+# meatspace_chat_v2_domain:         Meatspace Chat application URL
+# meatspace_chat_v2_port:           Meatspace Chat applocatoin TCP port
+# meatspace_chat_v2_node_version:   Preferred Node.js version
+# meatspace_chat_v2_repo:           Meatspace Chat GitHub repository
+# meatspace_chat_v2_nvm_repo:       Node Version Manager Github repository
+# meatspace_chat_v2_os_packages:    OS level software dependency packages
+# meatspace_chat_v2_home_dir:       Meatspace Chat admin OS Home directory
+# meatspace_chat_v2_nvm_dir:        Node Version Manager (nvm) directory
+# meatspace_chat_v2_node_dir:       Node.js installation directory
+# meatspace_chat_v2_src_dir:        Source code directory
+# meatspace_chat_v2_app_dir:        Meatspace Chat application directory
+# meatspace_chat_v2_bin_dir:        Meatspace Chat admin binary directory
+# meatspace_chat_v2_ffmpeg_src_dir: ffmpeg source directory
+# meatspace_chat_v2_ffmpeg_dir:     ffmpeg build directory
+# meatspace_chat_v2_fdk_aac_dir:    FDK-AAC build direcotry
 #
 #############################################################################
 
-meatspace_chat_v2_domain: http://10.1.1.40
+meatspace_chat_v2_domain: 10.1.1.40
 
 meatspace_chat_v2_port: 3000
 
@@ -39,7 +48,6 @@ meatspace_chat_v2_os_packages:
   - libvorbis-dev
   - libx264-dev
   - pkg-config
-  - redis-server
   - texi2html
   - unzip
   - uuid-dev
@@ -47,6 +55,24 @@ meatspace_chat_v2_os_packages:
   - yasm
   - zlib1g-dev
 
-meatspace_chat_v2_ffmpeg_build: /home/{{ meatspace_chat_v2_admin }}/ffmpeg_build
+meatspace_chat_v2_home_dir: /home/{{ meatspace_chat_v2_admin }}
 
-meatspace_chat_v2_ffmpeg_src: /home/{{ meatspace_chat_v2_admin }}/ffmpeg_sources
+meatspace_chat_v2_nvm_dir: "{{ meatspace_chat_v2_home_dir }}/.nvm"
+
+meatspace_chat_v2_node_dir: "{{ meatspace_chat_v2_nvm_dir }}/v{{ meatspace_chat_v2_node_version }}"
+
+meatspace_chat_v2_src_dir: "{{ meatspace_chat_v2_home_dir }}/src"
+
+meatspace_chat_v2_app_dir: "{{ meatspace_chat_v2_home_dir }}/meatspace-chat"
+
+meatspace_chat_v2_bin_dir: "{{ meatspace_chat_v2_home_dir }}//bin"
+
+meatspace_chat_v2_ffmpeg_dir: "{{ meatspace_chat_v2_home_dir }}/ffmpeg"
+
+meatspace_chat_v2_ffmpeg_src_dir: "{{ meatspace_chat_v2_home_dir }}/src/ffmpeg"
+
+meatspace_chat_v2_fdk_aac_dir: "{{ meatspace_chat_v2_src_dir }}/fdk-aac-0.1.3"
+
+meatspace_chat_v2_fdk_acc_url: https://github.com/mstorsjo/fdk-aac/archive/v0.1.3.zip
+
+meatspace_chat_v2_fdk_acc_zip: fdk-aac-0.1.3.zip

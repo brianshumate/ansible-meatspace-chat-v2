@@ -3,13 +3,13 @@
 # File: start_meatspace_chat.sh - startup script for Meatspace Chat
 #
 
-PATH="$PATH:{{ meatspace_chat_nvm_dir }}/v{{ meatspace_chat_node_version }}/bin"
+PATH="$PATH:{{ meatspace_chat_v2_nvm_dir }}/v{{ meatspace_chat_v2_node_version }}/bin"
 export PATH
 
-cd {{ meatspace_chat_dir }}
+cd {{ meatspace_chat_v2_app_dir }}
 
-. {{ meatspace_chat_nvm_dir }}/nvm.sh
+. {{ meatspace_chat_v2_nvm_dir }}/nvm.sh
 
-nvm use {{ meatspace_chat_node_version }}
+nvm use {{ meatspace_chat_v2_node_version }}
 
 npm start
