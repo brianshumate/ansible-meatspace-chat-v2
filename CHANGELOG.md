@@ -13,3 +13,8 @@
 
 - Updated vagran_site.yml example
 - Updated docs
+
+## v1.0.3
+
+- Updated meta
+- Updated docs

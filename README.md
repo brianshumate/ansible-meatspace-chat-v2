@@ -1,4 +1,4 @@
-# Ansible Meatspace Chat Version 2
+# Meatspace Chat Version 2
 
 ```
 
@@ -57,7 +57,7 @@ MEATSPACECHATMEATSPACECHATMMMMMMMMMMM+++MEATSPACECHATMEATSPACECHATMEATSPACECHATM
 ```
 
 This is an [Ansible](http://www.ansible.com/) role for
-[Meatspace Chat v2: Electric Boogaloo](https://github.com/meatspaces/meatspace-chat-v2), the fantastic
+[Meatspace Chat version 2: Electric Boogaloo](https://github.com/meatspaces/meatspace-chat-v2), the fantastic
 ephemeral web chat community of wonderful meats, animated WebM goodness,
 side splitting improv, and so much more.
 
