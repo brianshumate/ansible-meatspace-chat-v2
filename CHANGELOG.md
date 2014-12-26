@@ -8,3 +8,8 @@
 
 - Updated site.yml example
 - Updated docs
+
+## v1.0.2
+
+- Updated vagran_site.yml example
+- Updated docs

@@ -25,7 +25,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     end
     meatspace_chat_config.vm.provision :ansible do |ansible|
       ansible.inventory_path = BOT_HOST
-      ansible.playbook = "site.yml"
+      ansible.playbook = "vagrant_site.yml"
     end
   end
 end
