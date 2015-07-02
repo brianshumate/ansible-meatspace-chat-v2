@@ -84,7 +84,7 @@ All variables are specified in `defaults/main.yml` and `vars/main.yml`.
 | -------------- | ------------- | -----------------------------------|
 | meatspace_chat_v2_domain  | `http://10.1.1.40` | URL for Meatspace Chat app |
 | meatspace_chat_v2_port | 3000 | TCP port for Meatspace Chat app |
-| meatspace_chat_v2_node_version | 0.10.26 | Preferred Node.js version |
+| meatspace_chat_v2_node_version | 0.10.35 | Preferred Node.js version |
 | meatspace_chat_v2_repo | `github.com/meatspaces/meatspace-chat-v2.git` | Meatspace Chat GitHub repository |
 | meatspace_chat_v2_nvm_repo | `github.com/creationix/nvm.git` | Node Version Manager Github repository |
 | meatspace_chat_v2_os_packages | List | List of OS dependency packages to install |
